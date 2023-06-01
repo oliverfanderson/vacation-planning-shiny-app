@@ -61,18 +61,6 @@ currencies <- currencies %>% mutate("Country" = countryList) %>% select(-country
 # merge into last dataset for app
 sun_stars <- inner_join(sun_stars, currencies, "Country")
 
-######################
-
-rate <- jsonlite::fromJSON('https://api.exchangerate.host/convert?from=USD&to=EUR')
-
-rate$result
-
-
-
-
-
-######################
-
 # BASE LEAFLET
 # getting world map data
 mapWorld = map("world", fill = TRUE, plot = FALSE)
@@ -134,7 +122,7 @@ server <- function(input, output, session) {
                 longitude = mean(longitude))
   })
   
-  # REACTICE LEAFLET
+  # REACTIVE LEAFLET
   output$myMap <- renderLeaflet({
     # generate leaflet
     leaflet(data = mapWorld) %>%
